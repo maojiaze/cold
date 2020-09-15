@@ -1,6 +1,7 @@
 package com.example.cold.service.impl;
 
 import com.example.cold.entity.SysUser;
+import com.example.cold.help.shiro.CryptoUtil;
 import com.example.cold.mapper.SysUserMapper;
 import com.example.cold.service.ISysUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -40,5 +41,19 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
             return "欢迎来到管理员页面";
         }
         return "权限错误";
+    }
+
+    @Override
+    public String register(String userName, String password,Integer roleId) throws Exception {
+         String p = userMapper.getRoleByUserName(userName);
+         if(p!=null){
+             throw new Exception("用户名重复");
+         }
+         SysUser sysUser=new SysUser();
+         sysUser.setUserName(userName);
+         sysUser.setPassword(CryptoUtil.md5(password));
+         sysUser.setRoleId(roleId);
+         this.save(sysUser);
+         return "注册成功";
     }
 }

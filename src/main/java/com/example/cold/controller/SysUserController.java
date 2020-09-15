@@ -2,6 +2,7 @@ package com.example.cold.controller;
 
 
 import com.example.cold.help.BaseResponse;
+import com.example.cold.help.BaseResponseEnums;
 import com.example.cold.service.ISysUserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -31,13 +32,24 @@ public class SysUserController {
     private ISysUserService sysUserService;
 
     /**
+     * 注册
+     */
+    @RequestMapping(value="/login/register",method = RequestMethod.POST)
+    public BaseResponse register(@RequestParam("userName")String userName,@RequestParam("password")String password,
+                                 @RequestParam("roleId")Integer roleId) throws Exception {
+        BaseResponse baseResponse=new  BaseResponse(BaseResponseEnums.SUCCESS.getCode(),
+            sysUserService.register(userName,password,roleId));
+        return baseResponse;
+    }
+
+    /**
      * 登陆
      * @param userName
      * @param password
      */
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     public BaseResponse login(@RequestParam("userName") String userName,@RequestParam("password")String password){
-         BaseResponse baseResponse=new BaseResponse(1,sysUserService.login(userName,password));
+         BaseResponse baseResponse=new BaseResponse(BaseResponseEnums.SUCCESS.getCode(),sysUserService.login(userName,password));
          return  baseResponse;
     }
 
@@ -45,16 +57,18 @@ public class SysUserController {
      * 注销
      */
     @RequestMapping("/logout")
-    public String logout(){
+    public BaseResponse logout(){
         Subject subject=SecurityUtils.getSubject();
         subject.logout();
-        return "注销成功";
+        BaseResponse baseResponse=new BaseResponse(BaseResponseEnums.SUCCESS.getCode(),"注销成功");
+        return baseResponse;
     }
 
     @RequestMapping("/cs")
     @RequiresRoles("user")
-    public void cs(){
-        System.out.println("测试成功");
+    public BaseResponse cs(){
+        BaseResponse baseResponse=new BaseResponse(BaseResponseEnums.SUCCESS.getCode(),"测试成功");
+        return baseResponse;
     }
 
 }

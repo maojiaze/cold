@@ -33,12 +33,12 @@ public class CustomRealm extends AuthorizingRealm {
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
         // 从数据库获取对应用户名密码的用户
         String password = userMapper.getPasswordByUserName(token.getUsername());
-        if (null == password) {
-            throw new AccountException("用户名不正确");
-        } else if (!password.equals(new String((char[]) token.getCredentials()))) {
-            throw new AccountException("密码不正确");
+        //加密
+        String md5Password=CryptoUtil.md5(new String((char[]) token.getCredentials()));
+        if (null == password  || !md5Password.equals(password)) {
+            throw new AccountException("用户名或密码错误");
         }
-        return new SimpleAuthenticationInfo(token.getPrincipal(), password, getName());
+        return new SimpleAuthenticationInfo(token.getPrincipal(), new String((char[]) token.getCredentials()), getName());
     }
 
     /**

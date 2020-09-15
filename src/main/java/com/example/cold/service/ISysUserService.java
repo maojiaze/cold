@@ -14,4 +14,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface ISysUserService extends IService<SysUser> {
 
     String login(String userName,String password);
+
+    String register(String userName,String password,Integer roleId) throws Exception;
 }
