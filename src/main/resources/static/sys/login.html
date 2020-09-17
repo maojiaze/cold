@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!-- import CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+</head>
+<!-- import Vue before Element -->
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<!-- import JavaScript -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<body>
+<el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm"
+         id="app">
+    <el-form-item label="密码" prop="password">
+        <el-input type="password" v-model="ruleForm.password" autocomplete="off"></el-input>
+    </el-form-item>
+
+    <el-form-item>
+        <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
+        <el-button @click="resetForm('ruleForm')">重置</el-button>
+    </el-form-item>
+</el-form>
+<script>
+    new Vue({
+        el: '#app',
+        data: function() {
+            var validatePass = (rule, value, callback) => {
+                if (value === '') {
+                    callback(new Error('请输入密码'));
+                } else {
+                    if (this.ruleForm.checkPass !== '') {
+                        this.$refs.ruleForm.validateField('checkPass');
+                    }
+                    callback();
+                }
+            };
+            return {
+                ruleForm: {
+                    password: '',
+                },
+                rules: {
+                    password: [
+                        { validator: validatePass, trigger: 'blur' }
+                    ],
+                }
+            };
+        },
+        methods: {
+            submitForm(formName) {
+                this.$refs[formName].validate((valid) => {
+                    if (valid) {
+                        alert('submit!');
+                    } else {
+                        console.log('error submit!!');
+                        return false;
+                    }
+                });
+            },
+            resetForm(formName) {
+                this.$refs[formName].resetFields();
+            }
+        }
+    })
+</script>
+</body>
+</html>
