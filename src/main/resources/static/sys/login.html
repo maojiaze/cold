@@ -12,14 +12,17 @@
 <body>
 <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm"
          id="app">
-    <el-form-item label="密码" prop="password">
-        <el-input type="password" v-model="ruleForm.password" autocomplete="off"></el-input>
-    </el-form-item>
+    <div style="width: 500px;height: 200px;background-color: lightblue;box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);padding-top: 15px">
+        <el-form-item label="密码" prop="password" style="width: 70%">
+            <el-input type="password" v-model="ruleForm.password" autocomplete="off"></el-input>
+        </el-form-item>
 
-    <el-form-item>
-        <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
-        <el-button @click="resetForm('ruleForm')">重置</el-button>
-    </el-form-item>
+        <el-form-item style="width: 70%">
+            <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
+            <el-button @click="resetForm('ruleForm')">重置</el-button>
+        </el-form-item>
+    </div>
+
 </el-form>
 <script>
     new Vue({

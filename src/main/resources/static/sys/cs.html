@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<body>
+   <div id="app">
+       {{message}}
+
+       <span v-bind:title="message2">
+       qqqq
+       </span>
+       <ol>
+           <todo-time></todo-time>
+       </ol>
+       {{reversedMessage}}
+   </div>
+<script>
+    Vue.component("todo-time",{
+        template:'<div>组件</div>'
+    })
+
+    var app=new Vue({
+        el:'#app',
+        data:{
+            message:"qwewqe",
+            message2: '页面加载于 ' + new Date().toLocaleString()
+        },
+        computed: {
+            reversedMessage:function () {
+                 return this.message.split('').reverse().join('')
+            }
+        }
+
+    })
+</script>
+</body>
+</html>

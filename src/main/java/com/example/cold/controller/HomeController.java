@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomeController {
     @RequestMapping("/")
     public  String login(){
-        return "/sys/login.html";
+        return "/sys/cs.html";
     }
 }
