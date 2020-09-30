@@ -1,5 +1,8 @@
 package com.example.cold.z_design_test.adapter;
 
+/**
+ * 适配器
+ */
 public class DuckTestDrive {
     public static void main(String[] args) {
         MallardDuck duck=new MallardDuck();

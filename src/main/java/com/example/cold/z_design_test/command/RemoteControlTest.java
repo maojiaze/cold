@@ -1,5 +1,8 @@
 package com.example.cold.z_design_test.command;
 
+/**
+ * 命令模式
+ */
 public class RemoteControlTest {
     public static void main(String[] args) {
         Light light=new Light();
