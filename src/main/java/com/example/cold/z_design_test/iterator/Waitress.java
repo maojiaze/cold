@@ -1,21 +1,14 @@
 package com.example.cold.z_design_test.iterator;
 
-public class Waitress {
-     PancakeHouseMenu pancakeHouseMenu;
-     DinerMenu dinerMenu;
+import java.util.Iterator;
 
-    public Waitress(PancakeHouseMenu pancakeHouseMenu, DinerMenu dinerMenu) {
-        this.pancakeHouseMenu = pancakeHouseMenu;
-        this.dinerMenu = dinerMenu;
-    }
+public class Waitress {
 
     public void printMenu(){
-        Iterator pancakeIterator=pancakeHouseMenu.createIterator();
-        Iterator dinerIterator=dinerMenu.createIterator();
-        System.out.println("MENU\n---\nBREAKFAST");
-        printMenu(pancakeIterator);
-        System.out.println("\nlunch");
-        printMenu(dinerIterator);
+        System.out.println("all menu");
+        IteratorArrayList iteratorArrayList=new IteratorArrayList();
+        Iterator iterator= iteratorArrayList.getAll();
+        printMenu(iterator);
 
     }
 

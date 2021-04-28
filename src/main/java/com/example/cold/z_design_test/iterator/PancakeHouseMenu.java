@@ -1,8 +1,9 @@
 package com.example.cold.z_design_test.iterator;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
-public class PancakeHouseMenu {
+public class PancakeHouseMenu implements Menu{
     ArrayList menuItems;
     public PancakeHouseMenu(){
         menuItems=new ArrayList();
@@ -17,8 +18,9 @@ public class PancakeHouseMenu {
         menuItems.add(menuItem);
     }
 
+    @Override
     public Iterator createIterator(){
-        return  new PancakeHouseMenuIterator(menuItems);
+        return menuItems.iterator();
     }
 
 }
